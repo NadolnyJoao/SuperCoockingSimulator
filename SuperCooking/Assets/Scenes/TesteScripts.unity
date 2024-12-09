@@ -1180,24 +1180,7 @@ MonoBehaviour:
   m_DefaultActionMap: Move
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 963194227}
---- !u!114 &498270021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498270012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c285a158316844b8be850c4911caea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerCamera: {fileID: 963194227}
-  sensitivity: 2
-  MyCamera: {fileID: 963194228}
-  MousePosition: {x: 0, y: 0}
-  interactionText: {fileID: 0}
-  interactionDistance: 3
+
 --- !u!1 &521748748
 GameObject:
   m_ObjectHideFlags: 0
