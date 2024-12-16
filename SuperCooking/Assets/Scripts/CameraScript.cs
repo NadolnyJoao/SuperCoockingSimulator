@@ -1,75 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class CameraScript : MonoBehaviour
 {
-    public Camera PlayerCamera;
-    public float sensitivity = 2.0f;
-
-    private float rotationX = 0f;
-    private float rotationY = 0f;
-    public Transform MyCamera;
-    public Vector2 MousePosition;
-    public GameObject interactionText;
-    private GD_InteractObject currentInteractable;
-    public float interactionDistance = 3f;
-
+    public Transform Mycamera;
+    public float MouseSensi = 100f;
+    float xRotation = 0f;
+    float mouseX;
+    float mouseY;
+    float mouseinputx;
+    float mouseinputy;
+    // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        HandleMouseLook();
-        HandleInteraction();
-    }
+        // float mouseX = Input.GetAxis("Mouse X") * MouseSensi * Time.deltaTime;
 
-    private void HandleMouseLook()
-    {
-        float mouseX = MousePosition.x * sensitivity * Time.deltaTime;
-        float mouseY = MousePosition.y * sensitivity * Time.deltaTime;
+        mouseX = mouseinputx * MouseSensi * Time.deltaTime;
+        // float mouseY = Input.GetAxis("Mouse Y") * MouseSensi * Time.deltaTime;
 
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); 
+        mouseY = mouseinputy * MouseSensi * Time.deltaTime;
 
-        rotationY += mouseX;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
-        MyCamera.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        Mycamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            MouseSensi = 120;
+        }
+        
     }
 
-    private void HandleInteraction()
+    public void OnLookEvent(InputAction.CallbackContext value)
     {
-        Ray ray = PlayerCamera.ScreenPointToRay(MousePosition); // Create a ray from the camera
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, interactionDistance))
-        {
-            GD_InteractObject interactableObject = hit.collider.GetComponent<GD_InteractObject>();
-            if (interactableObject != null && interactableObject != currentInteractable)
-            {
-                currentInteractable = interactableObject;
-                interactionText.SetActive(true);
-                TextMeshProUGUI textComponent = interactionText.GetComponent<TextMeshProUGUI>();
-                
-                if (textComponent != null)
-                {
-                    textComponent.text = currentInteractable.GetInteractionText(); // Show interaction text
-                }
-            }
-        }
-        else
-        {
-            currentInteractable = null;
-            interactionText.SetActive(false);
-        }
-    }
-
-    void OnLook(InputValue value)
-    {
-        MousePosition = value.Get<Vector2>();
+        mouseinputx = value.ReadValue<Vector2>().x;
+        mouseinputy = value.ReadValue<Vector2>().y;
     }
 }
