@@ -8,7 +8,6 @@ public class GD_PlayerInteract : MonoBehaviour
     public GameObject interactionText;
     private GD_InteractObject currentInteractable;
 
-
     void Start()
     {
         if (interactionText != null)
@@ -20,6 +19,7 @@ public class GD_PlayerInteract : MonoBehaviour
     void Update()
     {
         CheckForInteractable();
+        OnInteract(); // Call OnInteract in Update to check for interaction
     }
 
     private void CheckForInteractable()
@@ -58,10 +58,15 @@ public class GD_PlayerInteract : MonoBehaviour
 
     public void OnInteract()
     {
-        if (currentInteractable != null)
+        if (currentInteractable != null && interactionText.activeSelf && Input.GetKeyDown(KeyCode.E))
         {
-            currentInteractable.Interact();
-           
+            // Send a message to the GD_ObjectInteract script
+            GD_InteractObject objectInteract = currentInteractable.GetComponent<GD_InteractObject>();
+            if (objectInteract != null)
+            {
+                objectInteract.Interact(); // Call the Interact method directly
+            }
+
             // Uncomment the following line if you want to destroy the object after interaction
             // if (currentInteractable.GetInteractionText() == "porta de sair") Destroy(currentInteractable.gameObject, 2);
         }
