@@ -58,7 +58,7 @@ public class GD_PlayerInteract : MonoBehaviour
 
     public void OnInteract()
     {
-        if (currentInteractable != null && interactionText.activeSelf && Input.GetKeyDown(KeyCode.E))
+        if (currentInteractable != null &&  Input.GetKeyDown(KeyCode.E))
         {
             // Send a message to the GD_ObjectInteract script
             GD_InteractObject objectInteract = currentInteractable.GetComponent<GD_InteractObject>();

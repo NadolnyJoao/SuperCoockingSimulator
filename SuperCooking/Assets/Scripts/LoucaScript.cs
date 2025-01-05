@@ -7,10 +7,18 @@ public class LoucaScript : MonoBehaviour
 {
     public Slider slider;
     int progress;
+    public GameObject interactionText;
+    public GameObject interactionSlider;
+    public GameObject interactionWater;
+    public GameObject interactionPrato;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        interactionSlider.SetActive(false);
+        interactionWater.SetActive(false);
+        interactionPrato.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,6 +30,13 @@ public class LoucaScript : MonoBehaviour
     {  
         progress++;
         slider.value = progress;
+        interactionText.SetActive(false);
+        interactionSlider.SetActive(true);
+        interactionWater.SetActive(true);
+        interactionPrato.SetActive(true);
+
+
+
     } 
 
 }
