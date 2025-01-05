@@ -14,6 +14,8 @@ public class LoucaScript : MonoBehaviour
     public GameObject interactionPratoLavado;
     public GameObject interactionPenela;
     public GameObject interactionPenelaLavado;
+    public GameObject interactionEsponja;
+    public Animator animator;
 
     
     
@@ -29,18 +31,28 @@ public class LoucaScript : MonoBehaviour
     void Update()
     {
         
+        
     } 
     public void ProgressLavando()
     {  
+        
         progress++;
         slider.value = progress;
         interactionText.SetActive(false);
         interactionSlider.SetActive(true);
         interactionWater.SetActive(true);
+        interactionEsponja.SetActive(true);
+        animator.SetTrigger("Open");
+        
+
         if(progress == 1)
         {
         interactionPrato.SetActive(true);
+        
         }
+        
+        
+
         if(progress == 5)
         {
             interactionPrato.SetActive(false);
@@ -54,6 +66,8 @@ public class LoucaScript : MonoBehaviour
             interactionPenelaLavado.SetActive(true);
             interactionWater.SetActive(false);
             interactionSlider.SetActive(false);
+            interactionEsponja.SetActive(false);
+
         }
 
 
