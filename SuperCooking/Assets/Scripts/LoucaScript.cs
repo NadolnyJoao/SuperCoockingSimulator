@@ -11,6 +11,10 @@ public class LoucaScript : MonoBehaviour
     public GameObject interactionSlider;
     public GameObject interactionWater;
     public GameObject interactionPrato;
+    public GameObject interactionPratoLavado;
+    public GameObject interactionPenela;
+    public GameObject interactionPenelaLavado;
+
     
     
     // Start is called before the first frame update
@@ -33,10 +37,27 @@ public class LoucaScript : MonoBehaviour
         interactionText.SetActive(false);
         interactionSlider.SetActive(true);
         interactionWater.SetActive(true);
+        if(progress == 1)
+        {
         interactionPrato.SetActive(true);
+        }
+        if(progress == 5)
+        {
+            interactionPrato.SetActive(false);
+            interactionPratoLavado.SetActive(true);
+            interactionPenela.SetActive(true);
+        }
+        if(progress == 10)
+        {
+            interactionPenela.SetActive(false);
+            interactionPrato.SetActive(false);
+            interactionPenelaLavado.SetActive(true);
+            interactionWater.SetActive(false);
+            interactionSlider.SetActive(false);
+        }
 
 
 
-    } 
-
+     
+    }
 }
