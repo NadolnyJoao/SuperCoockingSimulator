@@ -15,15 +15,22 @@ public class PratosProntos : MonoBehaviour
     public GameObject hamburguerCompleto;
     public GameObject cupcakeCompleto;
     public GameObject sopaCompleto;
+    public GameObject obj;
     public Transform SpawnPointPedido;
     public Transform SpawnPointCupcake;
     public Transform SpawnPointSopa;
     public float YOffset = 0.2f;
     public float YOffset2 = 0;
+
+    public LoucaScript PodeLavar;
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject obj = GameObject.FindGameObjectWithTag("Louca");
+        if (obj != null)
+        {
+            PodeLavar = obj.GetComponent<LoucaScript>();
+        }
     }
 
     // Update is called once per frame
@@ -39,12 +46,16 @@ public class PratosProntos : MonoBehaviour
 
         if(acucarNoPrato && chocolateNoPrato && farinhaNoPrato)
         {
-            Instantiate(cupcakeCompleto, new Vector3(SpawnPointCupcake.position.x, SpawnPointCupcake.position.y + YOffset, SpawnPointCupcake.position.z), SpawnPointPedido.rotation);  
+            
+            Instantiate(cupcakeCompleto, new Vector3(SpawnPointCupcake.position.x, SpawnPointCupcake.position.y + YOffset, SpawnPointCupcake.position.z), SpawnPointPedido.rotation);
+            PodeLavar.PodeLavaraLouca = true;  
         }
         acucarNoPrato = false;
         chocolateNoPrato = false;
         farinhaNoPrato = false;
-        if(sopaNoPrato)
+        
+
+        if(sopaNoPrato && PodeLavar.PodeSopa == true)
         {
             Instantiate(sopaCompleto, new Vector3(SpawnPointSopa.position.x, SpawnPointSopa.position.y + YOffset2, SpawnPointSopa.position.z), SpawnPointPedido.rotation);  
         }

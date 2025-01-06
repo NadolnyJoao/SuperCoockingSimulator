@@ -17,6 +17,8 @@ public class LoucaScript : MonoBehaviour
     public GameObject interactionEsponja;
     public Animator animator;
     public bool PodeLavaraLouca;
+    public bool PodeSopa = false;
+    
 
     
     
@@ -69,6 +71,8 @@ public class LoucaScript : MonoBehaviour
             interactionWater.SetActive(false);
             interactionSlider.SetActive(false);
             interactionEsponja.SetActive(false);
+            PodeSopa = true;
+             
 
         }
 
