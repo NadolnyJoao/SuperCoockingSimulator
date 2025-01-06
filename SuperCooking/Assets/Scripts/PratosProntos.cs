@@ -8,9 +8,18 @@ public class PratosProntos : MonoBehaviour
     public bool hamburguerNoPrato = false;
     public bool paoNoPrato = false;
     public bool queijoNoPrato = false;
+    public bool acucarNoPrato = false;
+    public bool farinhaNoPrato = false;
+    public bool chocolateNoPrato = false;
+    public bool sopaNoPrato = false;
     public GameObject hamburguerCompleto;
+    public GameObject cupcakeCompleto;
+    public GameObject sopaCompleto;
     public Transform SpawnPointPedido;
+    public Transform SpawnPointCupcake;
+    public Transform SpawnPointSopa;
     public float YOffset = 0.2f;
+    public float YOffset2 = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +33,21 @@ public class PratosProntos : MonoBehaviour
         {
             Instantiate(hamburguerCompleto, new Vector3(SpawnPointPedido.position.x, SpawnPointPedido.position.y + YOffset, SpawnPointPedido.position.z), SpawnPointPedido.rotation);  
         }
+        hamburguerNoPrato = false;
+        paoNoPrato = false;
+        queijoNoPrato = false;
+
+        if(acucarNoPrato && chocolateNoPrato && farinhaNoPrato)
+        {
+            Instantiate(cupcakeCompleto, new Vector3(SpawnPointCupcake.position.x, SpawnPointCupcake.position.y + YOffset, SpawnPointCupcake.position.z), SpawnPointPedido.rotation);  
+        }
+        acucarNoPrato = false;
+        chocolateNoPrato = false;
+        farinhaNoPrato = false;
+        if(sopaNoPrato)
+        {
+            Instantiate(sopaCompleto, new Vector3(SpawnPointSopa.position.x, SpawnPointSopa.position.y + YOffset2, SpawnPointSopa.position.z), SpawnPointPedido.rotation);  
+        }
+        sopaNoPrato = false;
     }
 }
