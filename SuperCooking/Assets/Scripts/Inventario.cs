@@ -34,9 +34,17 @@ public class Inventario : MonoBehaviour
         {
             pao2.SetActive(true);
         }
+        else
+        {
+            pao2.SetActive(false);
+        }
         if(queijo)
         {
             queijo2.SetActive(true);
+        }
+        else
+        {
+            queijo2.SetActive(false);
         }
         if(hamburguercru)
         {
@@ -49,6 +57,10 @@ public class Inventario : MonoBehaviour
         if(hamburguercozido)
         {
             hamburguercozido2.SetActive(true);
+        }
+        else
+        {
+            hamburguercozido2.SetActive(false);
         }
         if(farinha)
         {
