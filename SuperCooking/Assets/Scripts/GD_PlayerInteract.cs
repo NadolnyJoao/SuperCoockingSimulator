@@ -4,7 +4,7 @@ using TMPro;
 public class GD_PlayerInteract : MonoBehaviour
 {
     public Camera PlayerCamera;
-    public float InteractionDistance = 3f;
+    public float InteractionDistance = 4f;
     public GameObject interactionText;
     private GD_InteractObject currentInteractable;
 

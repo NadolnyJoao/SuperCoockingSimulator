@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 7762194472134162690}
   - component: {fileID: 2051749362350562522}
   - component: {fileID: 7204561767008960139}
+  - component: {fileID: 257428421}
+  - component: {fileID: 257428419}
+  - component: {fileID: 257428420}
   m_Layer: 0
   m_Name: groundBeef_Cooked
   m_TagString: Untagged
@@ -27,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 971856413232987139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6872194, y: 0.10009215, z: -4.8648205}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.36, y: 0.36, z: 0.36}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,3 +86,64 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &257428421
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971856413232987139}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4396381, y: 1.2223796, z: 2.1410758}
+  m_Center: {x: 0.12458471, y: 0.316818, z: -0.12579113}
+--- !u!114 &257428419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971856413232987139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f7a49705c2d3442b97d72f1a32f3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: Interagir Hamburguer
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 257428420}
+        m_TargetAssemblyTypeName: Hamburguer, Assembly-CSharp
+        m_MethodName: HamburguerFeito
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &257428420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971856413232987139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4879a33f5bd34074a84c9866cf8f27e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hamburguerfritar: 0
+  objectPrefab: {fileID: 0}
+  HambPronto: {fileID: 0}
+  spawnedObject: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  startTime: 60
+  timerText: {fileID: 0}
+  hambpronto: 0

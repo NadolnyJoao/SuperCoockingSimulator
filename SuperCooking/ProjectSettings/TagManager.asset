@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Louca
+  - Pao
+  - Hamburguer
+  - Queijo
+  - Carne
+  - Frigideira
   layers:
   - Default
   - TransparentFX
