@@ -2,38 +2,31 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Speed of the player
-    public Camera playerCamera; // Reference to the camera
-    public float mouseSensitivity = 2f; // Sensitivity for mouse movement
+    public float moveSpeed = 5f;
+    public Camera playerCamera; // Apenas como referência para direção da movimentação
+    public Transform player;            // Referência ao jogador
+    public float smoothSpeed = 0.02f;   // Velocidade de suavização, ajuste para mais ou menos suave
+    public Vector3 offset;
+    private Vector3 currentVelocity = Vector3.zero;
 
-    private float rotationY = 0f; // Vertical rotation
-    private float rotationX = 0f; // Horizontal rotation
-
-    private void Update()
+    void Update()
     {
-        // Get input from WASD keys
-        float horizontal = Input.GetAxis("Horizontal"); // A/D or Left/Right Arrow
-        float vertical = Input.GetAxis("Vertical"); // W/S or Up/Down Arrow
+        // Recebe input do teclado
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        // Create a movement vector
+        // Vetor normalizado do movimento
         Vector3 moveDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-        // Move the player
         if (moveDirection.magnitude >= 0.1f)
         {
-            // Move the player in the direction they are facing
+            // Movimento relativo à orientação da câmera fixa (sem rotação no mouse)
             Vector3 moveDir = playerCamera.transform.TransformDirection(moveDirection);
-            moveDir.y = 0; // Keep the movement on the horizontal plane
+            moveDir.y = 0; // mantém no plano horizontal
+            
             transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
         }
-
-        // Mouse look
-        rotationY += Input.GetAxis("Mouse X") * mouseSensitivity;
-        rotationX -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Clamp vertical rotation
-
-        // Apply rotation
-        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-        transform.rotation = Quaternion.Euler(0, rotationY, 0);
     }
+    
 }
+

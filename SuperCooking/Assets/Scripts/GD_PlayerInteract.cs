@@ -1,51 +1,72 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class GD_PlayerInteract : MonoBehaviour
 {
-    public Camera PlayerCamera;
     public float InteractionDistance = 4f;
     public GameObject interactionText;
     private GD_InteractObject currentInteractable;
+    private List<GD_InteractObject> interactablesInRange = new List<GD_InteractObject>();
 
     void Start()
     {
         if (interactionText != null)
         {
-            interactionText.SetActive(false); // Hide interaction text at the start
+            interactionText.SetActive(false); // Esconde o texto de interação no início
         }
     }
 
     void Update()
     {
-        CheckForInteractable();
-        OnInteract(); // Call OnInteract in Update to check for interaction
+        //OnInteract(); // Chama OnInteract em Update para verificar a interação
+        if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
+        {
+            Interact();
+        }
     }
 
-    private void CheckForInteractable()
+    private void OnTriggerEnter(Collider other)
     {
-        Ray ray = PlayerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, InteractionDistance))
+        GD_InteractObject interactableObject = other.GetComponent<GD_InteractObject>();
+        if (interactableObject != null)
         {
-            GD_InteractObject interactableObject = hit.collider.GetComponent<GD_InteractObject>();
-            if (interactableObject != null && interactableObject != currentInteractable)
+            interactablesInRange.Add(interactableObject);
+            if (currentInteractable == null)
             {
-                currentInteractable = interactableObject;
-                ShowInteractionText();
+                SetCurrentInteractable(interactableObject);
             }
         }
-        else
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        GD_InteractObject interactableObject = other.GetComponent<GD_InteractObject>();
+        if (interactableObject != null)
         {
-            currentInteractable = null;
-            interactionText.SetActive(false);
+            interactablesInRange.Remove(interactableObject);
+            if (interactableObject == currentInteractable)
+            {
+                RemoveCurrentInteractable();
+            }
         }
+    }
+
+    private void SetCurrentInteractable(GD_InteractObject interactable)
+    {
+        currentInteractable = interactable;
+        ShowInteractionText();
+    }
+
+    private void RemoveCurrentInteractable()
+    {
+        currentInteractable = null;
+        interactionText.SetActive(false);
     }
 
     private void ShowInteractionText()
     {
-        if (interactionText != null)
+        if (interactionText != null && currentInteractable != null)
         {
             interactionText.SetActive(true);
             TextMeshProUGUI textComponent = interactionText.GetComponent<TextMeshProUGUI>();
@@ -54,21 +75,26 @@ public class GD_PlayerInteract : MonoBehaviour
                 textComponent.text = currentInteractable.GetInteractionText();
             }
         }
+        else if (interactionText == null)
+        {
+            interactionText.SetActive(false);
+        }
     }
 
-    public void OnInteract()
+    public void Interact()
     {
-        if (currentInteractable != null &&  Input.GetKeyDown(KeyCode.E))
+        if (currentInteractable != null)
         {
-            // Send a message to the GD_ObjectInteract script
+            // Envia uma mensagem para o script GD_ObjectInteract
             GD_InteractObject objectInteract = currentInteractable.GetComponent<GD_InteractObject>();
             if (objectInteract != null)
             {
-                objectInteract.Interact(); // Call the Interact method directly
+                objectInteract.Interact(); // Chama o método Interact diretamente
             }
 
-            // Uncomment the following line if you want to destroy the object after interaction
+            // Descomente a linha a seguir se quiser destruir o objeto após a interação
             // if (currentInteractable.GetInteractionText() == "porta de sair") Destroy(currentInteractable.gameObject, 2);
+            RemoveCurrentInteractable();
         }
     }
 }
