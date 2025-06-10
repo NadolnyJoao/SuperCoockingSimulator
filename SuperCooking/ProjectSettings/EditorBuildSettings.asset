@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MarceloScriptComidas.unity
+    guid: aea32d5b08293384abb714db7361bbcf
   m_configObjects: {}

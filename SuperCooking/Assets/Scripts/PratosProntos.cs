@@ -22,7 +22,12 @@ public class PratosProntos : MonoBehaviour
     public float YOffset = 0.2f;
     public float YOffset2 = 0;
 
+    public GameObject hamburguerCompletoSpawn;
+    public GameObject cupcakeCompletoSpawn;
+    public GameObject sopaCompletoSpawn;
+
     public LoucaScript PodeLavar;
+    private EntregaBalcao entregaBalcao;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,12 @@ public class PratosProntos : MonoBehaviour
         {
             PodeLavar = obj.GetComponent<LoucaScript>();
         }
+
+        GameObject obj2 = GameObject.FindGameObjectWithTag("Esteira");
+        if (obj2 != null)
+        {
+            entregaBalcao = obj.GetComponent<EntregaBalcao>();
+        }
     }
 
     // Update is called once per frame
@@ -38,7 +49,8 @@ public class PratosProntos : MonoBehaviour
     {
         if(hamburguerNoPrato && paoNoPrato && queijoNoPrato)
         {
-            Instantiate(hamburguerCompleto, new Vector3(SpawnPointPedido.position.x, SpawnPointPedido.position.y + YOffset, SpawnPointPedido.position.z), SpawnPointPedido.rotation);  
+            hamburguerCompletoSpawn = Instantiate(hamburguerCompleto, new Vector3(SpawnPointPedido.position.x, SpawnPointPedido.position.y + YOffset, SpawnPointPedido.position.z), SpawnPointPedido.rotation); 
+            
         }
         hamburguerNoPrato = false;
         paoNoPrato = false;
@@ -47,8 +59,9 @@ public class PratosProntos : MonoBehaviour
         if(acucarNoPrato && chocolateNoPrato && farinhaNoPrato)
         {
             
-            Instantiate(cupcakeCompleto, new Vector3(SpawnPointCupcake.position.x, SpawnPointCupcake.position.y + YOffset, SpawnPointCupcake.position.z), SpawnPointPedido.rotation);
+            cupcakeCompletoSpawn = Instantiate(cupcakeCompleto, new Vector3(SpawnPointCupcake.position.x, SpawnPointCupcake.position.y + YOffset, SpawnPointCupcake.position.z), SpawnPointPedido.rotation);
             PodeLavar.PodeLavaraLouca = true;  
+            
         }
         acucarNoPrato = false;
         chocolateNoPrato = false;
@@ -57,7 +70,7 @@ public class PratosProntos : MonoBehaviour
 
         if(sopaNoPrato && PodeLavar.PodeSopa == true)
         {
-            Instantiate(sopaCompleto, new Vector3(SpawnPointSopa.position.x, SpawnPointSopa.position.y + YOffset2, SpawnPointSopa.position.z), SpawnPointPedido.rotation);  
+            sopaCompletoSpawn = Instantiate(sopaCompleto, new Vector3(SpawnPointSopa.position.x, SpawnPointSopa.position.y + YOffset2, SpawnPointSopa.position.z), SpawnPointPedido.rotation);  
         }
         sopaNoPrato = false;
     }
